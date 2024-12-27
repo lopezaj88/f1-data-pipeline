@@ -161,6 +161,6 @@ This project is licensed under the MIT License. See `LICENSE` for details.
 
 ## Author
 **Austin Lopez**  
-[GitHub Profile](https://github.com/yourusername)  
+[GitHub Profile](https://github.com/lopezaj88)  
 Email: lopezaj88@gmail.com
 
