@@ -10,7 +10,7 @@ mysqlConfig = {
     'port': 3306,
     'user': os.getenv('MYSQL_USER'),
     'password': os.getenv('MYSQL_PASSWORD'),
-    'database': 'databaseName'
+    'database': 'f1_analysis_sql'
 }
 
 # Load configuration
@@ -27,9 +27,9 @@ def main():
     positionPointsFile = collect_driver_position_and_points(config)
 
     # Step 2: Upload to MySQL
-    upload_to_mysql(lapFile, "lap_times", config["mysql"])
-    upload_to_mysql(pitFile, "pit_times", config["mysql"])
-    upload_to_mysql(positionPointsFile, 'driver_position_points', config['mysql'])
+    upload_to_mysql(lapFile, "lap_times", mysqlConfig)
+    upload_to_mysql(pitFile, "pit_times", mysqlConfig)
+    upload_to_mysql(positionPointsFile, 'driver_position_points', mysqlConfig)
 
     print(f"Data pipeline completed. CSVs are ready for Tableau in {outputDir}.")
 
