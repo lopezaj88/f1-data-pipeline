@@ -5,7 +5,7 @@ from Modules.upload_to_mysql import upload_to_mysql
 import json
 import os
 
-mysqlConfig = {
+sqlConfig = {
     'host': 'localhost',
     'port': 3306,
     'user': os.getenv('MYSQL_USER'),
@@ -13,8 +13,12 @@ mysqlConfig = {
     'database': 'f1_analysis_sql'
 }
 
+# Build absolute path to config.json
+scriptDir = os.path.dirname(os.path.abspath(__file__))
+configPath = os.path.join(scriptDir, "config.json")
+
 # Load configuration
-with open("config.json") as configFile:
+with open(configPath) as configFile:
     config = json.load(configFile)
 
 def main():
@@ -27,9 +31,9 @@ def main():
     positionPointsFile = collect_driver_position_and_points(config)
 
     # Step 2: Upload to MySQL
-    upload_to_mysql(lapFile, "lap_times", mysqlConfig)
-    upload_to_mysql(pitFile, "pit_times", mysqlConfig)
-    upload_to_mysql(positionPointsFile, 'driver_position_points', mysqlConfig)
+    upload_to_mysql(lapFile, "lap_times", sqlConfig)
+    upload_to_mysql(pitFile, "pit_times", sqlConfig)
+    upload_to_mysql(positionPointsFile, 'driver_position_points', sqlConfig)
 
     print(f"Data pipeline completed. CSVs are ready for Tableau in {outputDir}.")
 
